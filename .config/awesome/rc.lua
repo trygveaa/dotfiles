@@ -10,6 +10,11 @@ require("naughty")
 -- Custom completion
 require("completion")
 
+-- Widgets
+vicious = require("vicious")
+require("battery")
+require("calendar2")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -97,15 +102,24 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- }}}
 
 -- {{{ Wibox
--- Create a textclock widget
---mytextclock = awful.widget.textclock({ align = "right" })
-require('clock')
-require('calendar2')
-mytextclock = clock({ align = "right" })
-calendar2.addCalendarToWidget(mytextclock)
+-- Widgets
+datewidget = widget({ type = "textbox" })
+vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %T ", 1)
+calendar2.addCalendarToWidget(datewidget)
 
-require('battery')
-mybattery = battery({ align = "right" })
+batterywidget = battery({ align = "right" })
+--batterywidget = widget({ type = "textbox" })
+--vicious.register(batterywidget, vicious.widgets.bat, "$1$2%", 5, "BAT0")
+
+mpdwidget = widget({ type = "textbox" })
+vicious.register(mpdwidget, vicious.widgets.mpd,
+    function(widget, args)
+        if args["{state}"] == "Stop" then
+            return ""
+        else
+            return args["{Artist}"] .. " - " .. args["{Title}"]
+        end
+    end, 3)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -185,8 +199,9 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
-        mytextclock,
-        mybattery,
+        datewidget,
+        batterywidget,
+        mpdwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
