@@ -34,11 +34,11 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -51,18 +51,18 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
+--  awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+--  awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+--  awful.layout.suit.fair.horizontal,
+    awful.layout.suit.floating,
+--  awful.layout.suit.spiral,
+--  awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max
+--  awful.layout.suit.max.fullscreen,
+--  awful.layout.suit.magnifier,
 }
 -- }}}
 
@@ -95,7 +95,14 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
+--mytextclock = awful.widget.textclock({ align = "right" })
+require('clock')
+require('calendar2')
+mytextclock = clock({ align = "right" })
+calendar2.addCalendarToWidget(mytextclock)
+
+require('battery')
+mybattery = battery({ align = "right" })
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -169,13 +176,14 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
-            mylauncher,
+            --mylauncher,
             mytaglist[s],
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
         mytextclock,
+        mybattery,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -203,6 +211,16 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "k",
+        function ()
+            awful.client.focus.byidx(1)
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ "Mod1",           }, "Tab",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ "Mod1", "Shift"   }, "Tab",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -248,7 +266,22 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+    awful.key({ modkey }, ".", function() awful.util.spawn(os.getenv("HOME") .. "/bin/lock", false) end),
+    --awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " --profile=irssi -e 'ssh -X trygve@kramer.samfundet.no'") end),
+    awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " -e ssh -Y trygve@kramer.samfundet.no") end),
+    awful.key({ modkey }, "<", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey }, "-", function () awful.util.spawn("music toggle", false) end),
+    awful.key({ }, "XF86AudioPlay",    function () awful.util.spawn("music toggle", false) end),
+    awful.key({ }, "XF86AudioMute",    function () awful.util.spawn("vol mute", false) end),
+    awful.key({ }, "XF86AudioRaiseVolume",    function () awful.util.spawn("vol +", false) end),
+    awful.key({ }, "XF86AudioLowerVolume",    function () awful.util.spawn("vol -", false) end),
+    awful.key({ modkey }, "q", function () awful.util.spawn("browser -c") end),
+    awful.key({ modkey, "Control" }, "q", function () awful.util.spawn("browser -cb") end),
+
+    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/images/ 2>/dev/null'") end),
+    awful.key({ modkey }, "Print", function () awful.util.spawn("scrot -s -e 'mv $f ~/images/ 2>/dev/null'") end),
 )
 
 clientkeys = awful.util.table.join(
@@ -314,7 +347,8 @@ end
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
+    awful.button({ modkey }, 3, awful.mouse.client.resize),
+    awful.button({ "Control" }, 2, function (c) c:kill() end))
 
 -- Set keys
 root.keys(globalkeys)
@@ -329,12 +363,30 @@ awful.rules.rules = {
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
+    -- Floating windows
+    --{ rule = { class = "MPlayer" },
+      --properties = { floating = true } },
+    --{ rule = { class = "pinentry" },
+      --properties = { floating = true } },
+    --{ rule = { class = "gimp" },
+      --properties = { floating = true } },
+    { rule = { class = "Operapluginwrapper-ia32-linux" }, -- flash in Opera
       properties = { floating = true } },
-    { rule = { class = "pinentry" },
+    { rule = { class = "Operapluginwrapper-native" }, -- flash in Opera
       properties = { floating = true } },
-    { rule = { class = "gimp" },
+    { rule = { class = "Exe" }, -- flash in Chrome
       properties = { floating = true } },
+    { rule = { class = "<unknown>" }, -- flash in Firefox
+      properties = { floating = true } },
+    { rule = { class = "Plugin-container" }, -- flash in Firefox
+      properties = { floating = true } },
+    { rule = { class = "Wine" },
+      properties = { floating = true } },
+    { rule = { class = "Firefox", instance = "Download" },
+      properties = { floating = true } },
+    { rule = { class = "Firefox", instance = "Browser" },
+      properties = { floating = true } },
+
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -368,6 +420,6 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+-- client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
