@@ -7,6 +7,9 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+-- Custom completion
+require("completion")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -258,7 +261,18 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "r",
+        function ()
+            awful.prompt.run({ prompt = mypromptbox[mouse.screen].prompt },
+            mypromptbox[mouse.screen].widget,
+            function (...)
+                local result = awful.util.spawn(...)
+            end,
+            completion.custom,
+            awful.util.getdir("cache") .. "/history",
+            500)
+        end),
 
     awful.key({ modkey }, "x",
               function ()
