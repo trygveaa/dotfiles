@@ -361,6 +361,7 @@ awful.rules.rules = {
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = true,
+                     size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
     -- Floating windows
