@@ -296,6 +296,16 @@ globalkeys = awful.util.table.join(
 
     awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/images/ 2>/dev/null'") end),
     awful.key({ modkey }, "Print", function () awful.util.spawn("scrot -s -e 'mv $f ~/images/ 2>/dev/null'") end),
+
+    awful.key({ modkey }, "c", function ()
+        awful.prompt.run({ prompt = "Calculate: " }, mypromptbox[mouse.screen].widget,
+            function (expr)
+                local result = awful.util.eval("return (" .. expr .. ")")
+                naughty.notify({ text = expr .. " = " .. result, timeout = 10 })
+            end,
+            nil, awful.util.getdir("cache") .. "/history_calc"
+        )
+    end)
 )
 
 clientkeys = awful.util.table.join(
