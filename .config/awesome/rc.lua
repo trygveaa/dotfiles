@@ -110,8 +110,8 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ modkey }, 1, awful.client.movetotag),
                     awful.button({ }, 3, awful.tag.viewtoggle),
                     awful.button({ modkey }, 3, awful.client.toggletag),
-                    awful.button({ }, 4, awful.tag.viewnext),
-                    awful.button({ }, 5, awful.tag.viewprev)
+                    awful.button({ }, 4, awful.tag.viewprev),
+                    awful.button({ }, 5, awful.tag.viewnext)
                     )
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
@@ -137,11 +137,11 @@ mytasklist.buttons = awful.util.table.join(
                                               end
                                           end),
                      awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
+                                              awful.client.focus.byidx(-1)
                                               if client.focus then client.focus:raise() end
                                           end),
                      awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
+                                              awful.client.focus.byidx(1)
                                               if client.focus then client.focus:raise() end
                                           end))
 
@@ -154,8 +154,8 @@ for s = 1, screen.count() do
     mylayoutbox[s]:buttons(awful.util.table.join(
                            awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+                           awful.button({ }, 4, function () awful.layout.inc(layouts, -1) end),
+                           awful.button({ }, 5, function () awful.layout.inc(layouts, 1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
 
@@ -186,8 +186,8 @@ end
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 4, awful.tag.viewprev),
+    awful.button({ }, 5, awful.tag.viewnext)
 ))
 -- }}}
 
@@ -199,7 +199,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "k",
@@ -210,10 +210,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
