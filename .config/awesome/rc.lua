@@ -12,7 +12,6 @@ require("completion")
 
 -- Widgets
 vicious = require("vicious")
-require("battery")
 require("calendar2")
 
 -- {{{ Error handling
@@ -89,9 +88,11 @@ datewidget = widget({ type = "textbox" })
 vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %T ", 1)
 calendar2.addCalendarToWidget(datewidget)
 
-batterywidget = battery({ align = "right" })
---batterywidget = widget({ type = "textbox" })
---vicious.register(batterywidget, vicious.widgets.bat, "$1$2%", 5, "BAT0")
+batterywidget = widget({ type = "textbox" })
+vicious.register(batterywidget, vicious.widgets.bat, " $2$1 ", 10, "BAT0")
+
+volumewidget = widget({ type = "textbox" })
+vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
 
 mpdwidget = widget({ type = "textbox" })
 vicious.register(mpdwidget, vicious.widgets.mpd,
@@ -182,6 +183,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         datewidget,
         batterywidget,
+        volumewidget,
         mpdwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
