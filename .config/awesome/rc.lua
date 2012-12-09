@@ -97,10 +97,19 @@ vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
 mpdwidget = widget({ type = "textbox" })
 vicious.register(mpdwidget, vicious.widgets.mpd,
     function(widget, args)
-        if args["{state}"] == "Stop" then
-            return ""
+        local state
+        if args["{state}"] == "Play" then
+            state = "▶ "
+        elseif args["{state}"] == "Pause" then
+            --state = "❚❚ "
+            state = ""
         else
-            return args["{Artist}"] .. " - " .. args["{Title}"]
+            state = nil
+        end
+        if state then
+            return state .. args["{Artist}"] .. " - " .. args["{Title}"]
+        else
+            return ""
         end
     end, 3)
 
