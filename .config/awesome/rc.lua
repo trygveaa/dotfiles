@@ -90,6 +90,19 @@ calendar2.addCalendarToWidget(datewidget)
 
 batterywidget = widget({ type = "textbox" })
 vicious.register(batterywidget, vicious.widgets.bat, " $2$1 ", 10, "BAT0")
+batterywidget:add_signal("mouse::enter", function ()
+    local f = io.popen("acpi")
+    local acpi = f:read("*all")
+    f:close()
+    acpi = acpi:gsub("[\n\r]+", "")
+    batterynotification = naughty.notify({
+        title = "Battery status",
+        text = acpi,
+        timeout = 0,
+        screen = mouse.screen
+    })
+end)
+batterywidget:add_signal("mouse::leave", function () naughty.destroy(batterynotification) end)
 
 volumewidget = widget({ type = "textbox" })
 vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
