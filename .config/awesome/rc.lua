@@ -145,7 +145,7 @@ end
 mpdwidget:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("music toggle", false) end),
     awful.button({ }, 2, function () awful.util.spawn("music next", false) end),
-    awful.button({ }, 3, function () awful.util.spawn("music", false) end),
+    awful.button({ }, 3, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or ""), false) end),
     awful.button({ }, 4, function () mpd_change_host(mpd_reg.warg.cur_host + 1) end),
     awful.button({ }, 5, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end)
 ))
