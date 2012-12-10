@@ -114,7 +114,7 @@ volumewidget:buttons(awful.util.table.join(
 ))
 
 mpdwidget = widget({ type = "textbox" })
-vicious.register(mpdwidget, vicious.widgets.mpd,
+mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
     function(widget, args)
         local state
         if args["{state}"] == "Play" then
@@ -130,11 +130,27 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
         else
             return ""
         end
-    end)
+    end, 5, { hosts = { "localhost" }, cur_host = 1 })
 vicious.unregister(mpdwidget, true)
+
+function mpd_change_host(i)
+    if i == #mpd_reg.warg.hosts + 1 then
+        i = 1
+    elseif i == 0 then
+        i = #mpd_reg.warg.hosts
+    end
+    mpd_reg.warg.cur_host = i
+    mpd_reg.warg.host = mpd_reg.warg.hosts[i]
+    awful.util.spawn("update-mpd-widget.pl " .. mpd_reg.warg.host, false)
+    vicious.force({mpdwidget})
+end
+
 mpdwidget:buttons(awful.util.table.join(
     awful.button({ }, 1, function () awful.util.spawn("music toggle", false) end),
-    awful.button({ }, 3, function () awful.util.spawn("music", false) end)
+    awful.button({ }, 2, function () awful.util.spawn("music next", false) end),
+    awful.button({ }, 3, function () awful.util.spawn("music", false) end),
+    awful.button({ }, 4, function () mpd_change_host(mpd_reg.warg.cur_host + 1) end),
+    awful.button({ }, 5, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end)
 ))
 
 -- Create a systray
