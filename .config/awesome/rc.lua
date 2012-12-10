@@ -111,7 +111,8 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
         else
             return ""
         end
-    end, 3)
+    end)
+vicious.unregister(mpdwidget, true)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
