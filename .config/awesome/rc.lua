@@ -116,19 +116,16 @@ volumewidget:buttons(awful.util.table.join(
 mpdwidget = widget({ type = "textbox" })
 mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
     function(widget, args)
-        local state
-        if args["{state}"] == "Play" then
-            state = "▶ "
-        elseif args["{state}"] == "Pause" then
-            --state = "❚❚ "
-            state = ""
+        if args["{state}"] == "Stop" then
+            return "MPD stopped"
+        elseif args["{state}"] == "N/A" then
+            return "MPD not running"
         else
-            state = nil
-        end
-        if state then
-            return state .. args["{Artist}"] .. " - " .. args["{Title}"]
-        else
-            return ""
+            local state = args["{Artist}"] .. " - " .. args["{Title}"]
+            if args["{state}"] == "Play" then
+                state = "▶ " .. state
+            end
+            return state
         end
     end, 5, { hosts = { "localhost" }, cur_host = 1 })
 vicious.unregister(mpdwidget, true)
