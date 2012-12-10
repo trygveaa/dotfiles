@@ -106,6 +106,12 @@ batterywidget:add_signal("mouse::leave", function () naughty.destroy(batterynoti
 
 volumewidget = widget({ type = "textbox" })
 vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
+volumewidget:buttons(awful.util.table.join(
+    awful.button({ }, 2, function () awful.util.spawn("vol mute", false) end),
+    awful.button({ }, 3, function () awful.util.spawn("xterm -e alsamixer") end),
+    awful.button({ }, 4, function () awful.util.spawn("vol +", false) end),
+    awful.button({ }, 5, function () awful.util.spawn("vol -", false) end)
+))
 
 mpdwidget = widget({ type = "textbox" })
 vicious.register(mpdwidget, vicious.widgets.mpd,
@@ -126,6 +132,10 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
         end
     end)
 vicious.unregister(mpdwidget, true)
+mpdwidget:buttons(awful.util.table.join(
+    awful.button({ }, 1, function () awful.util.spawn("music toggle", false) end),
+    awful.button({ }, 3, function () awful.util.spawn("music", false) end)
+))
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
