@@ -190,6 +190,9 @@ mytasklist.buttons = awful.util.table.join(
                                                   c:raise()
                                               end
                                           end),
+                     awful.button({ }, 2, function(c)
+                                              c:kill()
+                                          end),
                      awful.button({ }, 3, function ()
                                               if instance then
                                                   instance:hide()
