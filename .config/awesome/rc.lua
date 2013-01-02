@@ -109,6 +109,7 @@ batterywidget:add_signal("mouse::leave", function () naughty.destroy(batterynoti
 
 volumewidget = widget({ type = "textbox" })
 vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
+vicious.unregister(volumewidget, true)
 volumewidget:buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn("vol mute", false) end),
     awful.button({ }, 3, function () awful.util.spawn("xterm -e alsamixer") end),
