@@ -90,6 +90,9 @@ calendar2.addCalendarToWidget(datewidget)
 
 batterywidget = widget({ type = "textbox" })
 vicious.register(batterywidget, vicious.widgets.bat, " $2$1 ", 10, "BAT0")
+batterywidget:buttons(awful.util.table.join(
+    awful.button({ }, 2, function () awful.util.spawn("suspend_monitor") end)
+))
 batterywidget:add_signal("mouse::enter", function ()
     local f = io.popen("acpi")
     local acpi = f:read("*all")
