@@ -143,7 +143,6 @@ function mpd_change_host(i)
     mpd_reg.warg.cur_host = i
     mpd_reg.warg.host = mpd_reg.warg.hosts[i]
     awful.util.spawn("update-mpd-widget.pl " .. mpd_reg.warg.host, false)
-    vicious.force({mpdwidget})
 end
 
 mpdwidget:buttons(awful.util.table.join(
