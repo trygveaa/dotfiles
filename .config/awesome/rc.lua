@@ -305,6 +305,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Mod1"    }, "Tab", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Mod1", "Shift" }, "Tab", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -353,10 +355,11 @@ globalkeys = awful.util.table.join(
               end),
 
     awful.key({ modkey }, ".", function() awful.util.spawn(os.getenv("HOME") .. "/bin/lock", false) end),
-    awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " -e ssh -Y trygve@kramer.samfundet.no") end),
-    awful.key({ modkey }, "a", function() awful.util.spawn(terminal .. " -e ssh -X trygve@kramer.samfundet.no -t 'screen -rd all'") end),
+    awful.key({ modkey }, "a", function() awful.util.spawn(terminal .. " -e mosh trygve@kramer.samfundet.no") end),
+    awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " -e ssh -X trygve@kramer.samfundet.no") end),
     awful.key({ modkey }, "<", function () awful.util.spawn(terminal) end),
     awful.key({ modkey }, "-", function () awful.util.spawn("music toggle", false) end),
+    awful.key({ modkey, "Shift" }, "-", function () awful.util.spawn("mpdfade", false) end),
     awful.key({ }, "XF86AudioPlay",    function () awful.util.spawn("music toggle", false) end),
     awful.key({ }, "XF86AudioMute",    function () awful.util.spawn("vol mute", false) end),
     awful.key({ }, "XF86AudioRaiseVolume",    function () awful.util.spawn("vol +", false) end),
@@ -440,8 +443,7 @@ end
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize),
-    awful.button({ "Control" }, 2, function (c) c:kill() end))
+    awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)
