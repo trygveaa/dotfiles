@@ -353,8 +353,8 @@ globalkeys = awful.util.table.join(
               end),
 
     awful.key({ modkey }, ".", function() awful.util.spawn(os.getenv("HOME") .. "/bin/lock", false) end),
-    --awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " --profile=irssi -e 'ssh -X trygve@kramer.samfundet.no'") end),
     awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " -e ssh -Y trygve@kramer.samfundet.no") end),
+    awful.key({ modkey }, "a", function() awful.util.spawn(terminal .. " -e ssh -X trygve@kramer.samfundet.no -t 'screen -rd all'") end),
     awful.key({ modkey }, "<", function () awful.util.spawn(terminal) end),
     awful.key({ modkey }, "-", function () awful.util.spawn("music toggle", false) end),
     awful.key({ }, "XF86AudioPlay",    function () awful.util.spawn("music toggle", false) end),
