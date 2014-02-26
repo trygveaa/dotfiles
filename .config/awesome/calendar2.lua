@@ -60,11 +60,24 @@ function displayMonth(month,year,weekStart)
         return header .. "\n" .. lines
 end
 
+function showNotification()
+    args = {
+        text = string.format('<span font_desc="%s">%s</span>', "monospace", displayMonth(calendar[1], calendar[2], 2)),
+        timeout = 0,
+        hover_timeout = 0.5,
+        screen = capi.mouse.screen,
+    }
+    if (#calendar >= 3) then
+        args["replaces_id"] = calendar[3].id
+    end
+    calendar[3] = naughty.notify(args)
+end
+
 function switchNaughtyMonth(switchMonths)
         if (#calendar < 3) then return end
         local swMonths = switchMonths or 1
         calendar[1] = calendar[1] + swMonths
-        calendar[3].box.widgets[2].text = string.format('<span font_desc="%s">%s</span>', "monospace", displayMonth(calendar[1], calendar[2], 2))
+        showNotification()
 end
 
 function addCalendarToWidget(mywidget, custom_current_day_format)
@@ -72,14 +85,8 @@ function addCalendarToWidget(mywidget, custom_current_day_format)
 
   mywidget:connect_signal('mouse::enter', function ()
         local month, year = os.date('%m'), os.date('%Y')
-        calendar = { month, year,
-        naughty.notify({
-                text = string.format('<span font_desc="%s">%s</span>', "monospace", displayMonth(month, year, 2)),
-                timeout = 0,
-                hover_timeout = 0.5,
-                screen = capi.mouse.screen
-        })
-  }
+        calendar = { month, year }
+        showNotification()
   end)
   mywidget:connect_signal('mouse::leave', function () naughty.destroy(calendar[3]) end)
 
