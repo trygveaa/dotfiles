@@ -11,6 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 naughty.config.defaults.icon_size = 32
 
+local capi = { timer = timer }
+
 -- Custom completion
 require("completion")
 
@@ -164,12 +166,41 @@ function mpd_change_host(i)
 end
 
 mpdwidget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () awful.util.spawn("music toggle", false) end),
-    awful.button({ }, 2, function () awful.util.spawn("music next", false) end),
-    awful.button({ }, 3, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or ""), false) end),
+    awful.button({ }, 1, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or "localhost") .. " toggle", false) end),
+    awful.button({ }, 2, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or "localhost") .. " next", false) end),
+    awful.button({ }, 3, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or "localhost"), false) end),
     awful.button({ }, 4, function () mpd_change_host(mpd_reg.warg.cur_host + 1) end),
-    awful.button({ }, 5, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end)
+    awful.button({ }, 5, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end),
+    awful.button({ }, 8, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end),
+    awful.button({ }, 9, function () mpd_change_host(mpd_reg.warg.cur_host + 1) end)
 ))
+
+mpd_show_notification = function()
+    local f = io.popen("music -h " .. (mpd_reg.warg.host or "localhost") .. " status")
+    local status = f:read("*all")
+    f:close()
+    status = status:gsub("%s*$", "")
+    local args = {
+        title = "MPD status",
+        text = status,
+        timeout = 0,
+        screen = mouse.screen
+    }
+    if mpdnotification then
+        args["replaces_id"] = mpdnotification.id
+    end
+    mpdnotification = naughty.notify(args)
+end
+mpd_notification_timer = capi.timer({ timeout = 1 })
+mpd_notification_timer:connect_signal("timeout", mpd_show_notification)
+mpdwidget:connect_signal("mouse::enter", function ()
+    mpd_show_notification()
+    mpd_notification_timer:start()
+end)
+mpdwidget:connect_signal("mouse::leave", function ()
+    mpd_notification_timer:stop()
+    naughty.destroy(mpdnotification)
+end)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
