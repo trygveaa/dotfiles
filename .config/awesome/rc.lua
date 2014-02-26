@@ -48,7 +48,7 @@ end
 beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -124,7 +124,7 @@ vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
 vicious.unregister(volumewidget, true)
 volumewidget:buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn("vol mute", false) end),
-    awful.button({ }, 3, function () awful.util.spawn("xterm -e alsamixer") end),
+    awful.button({ }, 3, function () awful.util.spawn(terminal .. " -e alsamixer") end),
     awful.button({ }, 4, function () awful.util.spawn("vol +", false) end),
     awful.button({ }, 5, function () awful.util.spawn("vol -", false) end)
 ))
