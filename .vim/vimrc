@@ -130,5 +130,14 @@ autocmd BufReadPost * call Kees_settabs()
 autocmd BufEnter Makefile* setlocal noet sts=0
 autocmd BufEnter */debian/rules setlocal noet sts=0
 
+" Ctrl-P
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = ''
+" Ctrl-P, open tab as default.
+let g:ctrlp_prompt_mappings = {
+  \ 'AcceptSelection("e")': ['<c-t>'],
+  \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+\ }
 
 execute pathogen#infect()
