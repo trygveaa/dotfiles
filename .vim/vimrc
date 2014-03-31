@@ -1,13 +1,8 @@
-"http://vimdoc.sourceforge.net/htmldoc/options.html
-
-" Check out https://github.com/carlhuda/janus for useful(?) plugins
-
 " General options
 
 set number
 set autoindent
 set smartindent
-"set cindent
 
 set expandtab
 set tabstop=4
@@ -15,8 +10,6 @@ set softtabstop=4
 set shiftwidth=4
 
 set mouse=a
-"set term=xterm
-"set ttymouse=xterm2
 
 syntax enable
 colorscheme desert
@@ -78,9 +71,6 @@ vmap <silent> <Tab> >gvllllollllo
 vmap <silent> <S-Tab> <gvhhhhohhhho
 inoremap <S-Tab> <C-d>
 
-" Comment code
-"nmap <silent> c :call ToggleComment('n')<CR>
-"vmap <silent> c :call ToggleComment('v')<CR>
 let mapleader=","
 filetype plugin on
 
@@ -116,67 +106,6 @@ map  <Esc>[1;5D <C-Left>
 map! <Esc>[1;5D <C-Left>
 map  <Esc>[Z <S-Tab>
 map! <Esc>[Z <S-Tab>
-"map  <Esc>[1~ <Home>
-"map! <Esc>[1~ <Home>
-"map  <Esc>[H <Home>
-"map! <Esc>[H <Home>
-"map  <Esc>OH <Home>
-"map! <Esc>OH <Home>
-"map  <Esc>[4~ <End>
-"map! <Esc>[4~ <End>
-"map  <Esc>[F <End>
-"map! <Esc>[F <End>
-"map  <Esc>OF <End>
-"map! <Esc>OF <End>
-
-" Function to comment text
-function ToggleComment(type)
-    let fileType = &ft
-    let symbol = '#'
-
-"   if fileType == 'python' || fileType == 'perl' || fileType == 'make' || fileType =~ '.*sh$'
-    if fileType == 'java' || fileType == 'javascript' || fileType == 'php' || fileType == 'cpp' || fileType == 'c' || fileType == 'go'
-        let symbol = '//'
-    elseif fileType == 'vim'
-        let symbol = '"'
-    elseif fileType == 'lua'
-        let symbol = '--'
-    elseif fileType == 'xdefaults'
-        let symbol = '\!'
-    endif
-
-    let l = line('.')
-    let c = col('.')
-    let tabSize = 4
-    let line = getline('.')
-    let symbolLength = strlen(symbol)
-
-    if match(line, '^\s*$') == -1 "Don't comment lines with only whitespace.
-        if match(line, '^\s*'.symbol) != -1
-            let spaces = tabSize - symbolLength
-            if match(line, '^\s*'.symbol.' \{'.spaces.'}') != -1
-                silent execute ':s!'.symbol.' \{'.spaces.'}!    !'
-            else
-                silent execute ':s!'.symbol.'!!'
-                let c -= symbolLength
-            endif
-        else
-            if match(line, '^ \{'.tabSize.'}') != -1
-                silent execute ':s!^ \{'.symbolLength.'}!'.symbol.'!'
-            else
-                silent execute ':s!^!'.symbol.'!'
-                let c += symbolLength
-            endif
-        endif
-    endif
-
-    if a:type == 'v'
-        call feedkeys("gv")
-    else
-        call cursor(l, c)
-    endif
-endfunction
-
 
 " Use bg=dark when using vimdiff
 if &diff
@@ -184,9 +113,6 @@ if &diff
 endif
 
 " Set noexpandtab when file uses tabs for indents
-" http://www.vim.org/scripts/script.php?script_id=1171
-" http://www.outflux.net/blog/archives/2007/03/09/detecting-space-vs-tab-indentation-type-in-vim/
-
 function Kees_settabs()
     if len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "\\t"')) > len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "    "'))
         setlocal noet sts=0
@@ -198,6 +124,5 @@ autocmd BufReadPost * call Kees_settabs()
 autocmd BufEnter Makefile* setlocal noet sts=0
 autocmd BufEnter */debian/rules setlocal noet sts=0
 
-autocmd Filetype java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 
 execute pathogen#infect()
