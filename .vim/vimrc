@@ -71,8 +71,14 @@ vmap <silent> <Tab> >gvllllollllo
 vmap <silent> <S-Tab> <gvhhhhohhhho
 inoremap <S-Tab> <C-d>
 
+" NERDCommenter
 let mapleader=","
+map <Esc>c ,c<Space>
+" Let NERDCommenter see the commentstring
 filetype plugin on
+" Use // for comments in C and C++
+" Should work but doesn't, issue 33: let NERD_c_alt_style=1
+let g:NERDCustomDelimiters = { 'c': { 'left': '//', 'right': '', 'leftAlt': '/*', 'rightAlt': '*/' } }
 
 " Smart home and end
 map  <expr> <Home> (match(getline('.'), '^\s*$') != -1 ? '0' : col('.') == matchend(getline('.'), '^\s*')+1 ? '0'  : '^')
