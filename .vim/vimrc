@@ -9,34 +9,34 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 
-" General options
+""" Settings
+filetype plugin indent on
+syntax enable
 
-set number
+colorscheme desert
+set t_Co=256
+set bg=dark
+
 set autoindent
 set smartindent
-
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+set number
 set mouse=a
-
-syntax enable
-colorscheme desert
-set t_Co=256
-set bg=dark
-
-set ml " Use modelines in files
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<  " :set list to show whitespace
-set wrap
-set lbr
-set nrformats=octal,hex,alpha
-
 set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+
+set nojoinspaces
+set modeline
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<  " :set list to show whitespace
+set wrap
+set linebreak
+set nrformats=octal,hex,alpha
 
 set tabpagemax=100
 set scrolloff=3
@@ -44,10 +44,24 @@ set statusline=%<%F%(\ %h%m%r%w%)\ [%Y\ %{&ff}]%=%b\ 0x%B\ \ %-17.(%l/%L,%c%V%)%
 set rulerformat=%20(%-17.(%M%l/%L,%c%V%)%P%)%<
 set showcmd
 
-set nojoinspaces
+" Use bg=dark when using vimdiff
+if &diff
+    set bg=dark
+endif
 
+" Set noexpandtab when file uses tabs for indents
+function Kees_settabs()
+    if len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "\\t"')) > len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "    "'))
+        setlocal noet sts=0
+    endif
+endfunction
+autocmd BufReadPost * call Kees_settabs()
 
-" Key bindings
+" Makefile sanity - always use tabs in makefiles and debian/rules
+autocmd BufEnter Makefile* setlocal noet sts=0
+autocmd BufEnter */debian/rules setlocal noet sts=0
+
+""" Key bindings
 
 " Copy and paste
 set pastetoggle=<F10>
@@ -82,15 +96,6 @@ vmap <silent> <Tab> >gvllllollllo
 vmap <silent> <S-Tab> <gvhhhhohhhho
 inoremap <S-Tab> <C-d>
 
-" NERDCommenter
-let mapleader=","
-map <Esc>c ,c<Space>
-" Let NERDCommenter see the commentstring
-filetype plugin on
-" Use // for comments in C and C++
-" Should work but doesn't, issue 33: let NERD_c_alt_style=1
-let g:NERDCustomDelimiters = { 'c': { 'left': '//', 'right': '', 'leftAlt': '/*', 'rightAlt': '*/' } }
-
 " Smart home and end
 map  <expr> <Home> (match(getline('.'), '^\s*$') != -1 ? '0' : col('.') == matchend(getline('.'), '^\s*')+1 ? '0'  : '^')
 imap        <Home> <C-o><Home>
@@ -124,22 +129,16 @@ map! <Esc>[1;5D <C-Left>
 map  <Esc>[Z <S-Tab>
 map! <Esc>[Z <S-Tab>
 
-" Use bg=dark when using vimdiff
-if &diff
-    set bg=dark
-endif
+""" Plugin settings
 
-" Set noexpandtab when file uses tabs for indents
-function Kees_settabs()
-    if len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "\\t"')) > len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "    "'))
-        setlocal noet sts=0
-    endif
-endfunction
-autocmd BufReadPost * call Kees_settabs()
-
-" Makefile sanity - always use tabs in makefiles and debian/rules
-autocmd BufEnter Makefile* setlocal noet sts=0
-autocmd BufEnter */debian/rules setlocal noet sts=0
+" NERDCommenter
+let mapleader=","
+map <Esc>c ,c<Space>
+" Let NERDCommenter see the commentstring
+filetype plugin on
+" Use // for comments in C and C++
+" Should work but doesn't, issue 33: let NERD_c_alt_style=1
+let g:NERDCustomDelimiters = { 'c': { 'left': '//', 'right': '', 'leftAlt': '/*', 'rightAlt': '*/' } }
 
 " Ctrl-P
 let g:ctrlp_map = '<c-p>'
