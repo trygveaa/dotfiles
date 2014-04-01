@@ -134,55 +134,61 @@ volumewidget:buttons(awful.util.table.join(
 mpdwidget = wibox.widget.textbox()
 mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
     function(widget, args)
-        local host
-        if mpd_reg ~= nil and mpd_reg.warg.host ~= nil and mpd_reg.warg.host ~= "localhost" then
-            host = mpd_reg.warg.host:gsub("[.-].*", "") .. ": "
-        else
-            host = ""
-        end
+        local state
         if args["{state}"] == "Stop" then
-            return host .. "MPD stopped"
+            state = "MPD stopped"
         elseif args["{state}"] == "N/A" then
-            return host .. "MPD not running"
+            state = "MPD not running"
         else
-            local state = args["{Artist}"] .. " - " .. args["{Title}"]
+            state = args["{Artist}"] .. " - " .. args["{Title}"]
             if args["{state}"] == "Play" then
                 state = "▶ " .. state
             end
-            return host .. state
         end
-    end, 5, { hosts = { "localhost" }, cur_host = 1 })
+        return (mpd_reg and mpd_reg.warg.name or "") .. state
+    end,
+    5,
+    { hosts = { "localhost" },
+      names = { "" } }
+)
 vicious.unregister(mpdwidget, true)
 
 function mpd_change_host(i)
-    if i == #mpd_reg.warg.hosts + 1 then
-        i = 1
-    elseif i == 0 then
-        i = #mpd_reg.warg.hosts
+    mpd_reg.warg.cur_host = ((mpd_reg.warg.cur_host or 1) + i - 1) % #mpd_reg.warg.hosts + 1
+    mpd_reg.warg.host, mpd_reg.warg.port = mpd_reg.warg.hosts[mpd_reg.warg.cur_host]:match("([%a%d.-]+):?(%d*)")
+    if mpd_reg.warg.port == "" then
+        mpd_reg.warg.port = "6600"
     end
-    mpd_reg.warg.cur_host = i
-    mpd_reg.warg.host = mpd_reg.warg.hosts[i]
-    awful.util.spawn("update-mpd-widget.pl " .. mpd_reg.warg.host, false)
+    mpd_reg.warg.name = mpd_reg.warg.names[mpd_reg.warg.cur_host]
+    awful.util.spawn("update-mpd-widget.pl " .. mpd_reg.warg.host .. " " .. mpd_reg.warg.port, false)
 end
+mpd_change_host(0)
 
 mpdwidget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or "localhost") .. " toggle", false) end),
-    awful.button({ }, 2, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or "localhost") .. " next", false) end),
-    awful.button({ }, 3, function () awful.util.spawn("music -h " .. (mpd_reg.warg.host or "localhost"), false) end),
-    awful.button({ }, 4, function () mpd_change_host(mpd_reg.warg.cur_host + 1) end),
-    awful.button({ }, 5, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end),
-    awful.button({ }, 8, function () mpd_change_host(mpd_reg.warg.cur_host - 1) end),
-    awful.button({ }, 9, function () mpd_change_host(mpd_reg.warg.cur_host + 1) end)
+    awful.button({ }, 1, function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " toggle", false) end),
+    awful.button({ }, 2, function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " next", false) end),
+    awful.button({ }, 3, function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port, false) end),
+    awful.button({ }, 4, function () mpd_change_host(1) end),
+    awful.button({ }, 5, function () mpd_change_host(-1) end),
+    awful.button({ }, 8, function () mpd_change_host(-1) end),
+    awful.button({ }, 9, function () mpd_change_host(1) end)
 ))
 
 mpd_show_notification = function()
-    local f = io.popen("music -h " .. (mpd_reg.warg.host or "localhost") .. " status")
+    local f = io.popen("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " status")
     local status = f:read("*all")
     f:close()
     status = status:gsub("%s*$", "")
+
+    f = io.popen("spotify-album-art -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port)
+    local album_art = f:read("*line")
+    f:close()
+
     local args = {
         title = "MPD status",
         text = status,
+        icon = album_art,
+        icon_size = 64,
         timeout = 0,
         screen = mouse.screen
     }
@@ -389,9 +395,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "a", function() awful.util.spawn(terminal .. " -e mosh trygve@kramer.samfundet.no") end),
     awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " -e ssh -X trygve@kramer.samfundet.no") end),
     awful.key({ modkey }, "<", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey }, "-", function () awful.util.spawn("music toggle", false) end),
+    awful.key({ modkey }, "-", function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " toggle", false) end),
     awful.key({ modkey, "Shift" }, "-", function () awful.util.spawn("mpdfade", false) end),
-    awful.key({ }, "XF86AudioPlay",    function () awful.util.spawn("music toggle", false) end),
+    awful.key({ }, "XF86AudioPlay",    function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " toggle", false) end),
     awful.key({ }, "XF86AudioMute",    function () awful.util.spawn("vol mute", false) end),
     awful.key({ }, "XF86AudioRaiseVolume",    function () awful.util.spawn("vol +", false) end),
     awful.key({ }, "XF86AudioLowerVolume",    function () awful.util.spawn("vol -", false) end),
