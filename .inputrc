@@ -1,0 +1,19 @@
+$include /etc/inputrc
+
+# Case insensitive tab completion
+set completion-ignore-case on
+
+# Show all tab alternatives at once
+#set show-all-if-ambiguous on
+
+# Two silly macros
+#
+# Insert double quotes & set cursor between them
+"\C-x\"": "\"\"\C-b"
+#
+# Insert single quotes & set cursor between them
+"\C-x'": "''\C-b"
+
+# For urxvt
+"\eOc": forward-word
+"\eOd": backward-word
