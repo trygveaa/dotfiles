@@ -2,13 +2,9 @@
 
 URxvt.font: xft:SourceCodePro:size=10,xft:FreeMono:size=10
 URxvt.letterSpace: -1
-!URxvt.lineSpace: 1
 
 Xft.antialias:  true
 Xft.hinting:    true
-
-!Xft.hintstyle:  hintslight
-!Xft.rgba:       rgb
 
 XTerm*faceName: SourceCodePro
 XTerm*faceSize: 10
@@ -47,25 +43,21 @@ XTerm*scrollKey: true
 URxvt.secondaryScroll: false
 
 
-! Copy/paste and url selection
+! Perl extensions
 
-URxvt.perl-lib: /home/trygve/.config/urxvt/perl
-!URxvt.keysym.Shift-Control-C: perl:clipboard:copy
-!URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.keysym.M-Insert: perl:clipboard:paste
-
+URxvt.perl-lib:             /home/trygve/.config/urxvt/perl
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select,vtwheel,font-size
 URxvt.selection.pattern-0:  (.*)
 URxvt.url-select.button:    3
 URxvt.url-select.launcher:  browser
 URxvt.url-select.underline: true
+
+URxvt.keysym.M-Insert:      perl:clipboard:paste
 URxvt.keysym.Mod4-w:        perl:url-select:select_next
 URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 URxvt.keysym.Mod4-e:        perl:keyboard-select:search
 URxvt.keysym.C-Up:          perl:font-size:increase
 URxvt.keysym.C-Down:        perl:font-size:decrease
-!URxvt.keysym.C-S-Up:        perl:font-size:incglobal
-!URxvt.keysym.C-S-Down:      perl:font-size:decglobal
 
 XTerm*VT100.translations:       #override \n\
     <Btn1Up>:                   select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
@@ -105,10 +97,6 @@ URxvt.termName: xterm
 
 URxvt.keysym.Home:              \033OH
 URxvt.keysym.End:               \033OF
-!URxvt.keysym.Home:              \033[H
-!URxvt.keysym.End:               \033[F
-!URxvt.keysym.Home:              \033[1~
-!URxvt.keysym.End:               \033[4~
 
 URxvt.keysym.S-Up:              \033[1;2A
 URxvt.keysym.S-Down:            \033[1;2B
