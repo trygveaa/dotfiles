@@ -45,8 +45,8 @@ URxvt.secondaryScroll: false
 
 ! Perl extensions
 
-URxvt.perl-lib:             /home/trygve/.config/urxvt/perl
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select,vtwheel,font-size
+URxvt.clipboard.autocopy:   true
 URxvt.selection.pattern-0:  (.*)
 URxvt.url-select.button:    3
 URxvt.url-select.launcher:  browser
