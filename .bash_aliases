@@ -20,6 +20,11 @@ alias feh='feh --scale-down --no-screen-clip'
 # Color options
 alias ls='ls --color=auto'
 alias lb='ls --color=none'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # Various stuff
 alias vimnorc="vim -u NONE -c 'set nocompatible'"
