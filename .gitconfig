@@ -1,0 +1,33 @@
+[user]
+	name = Trygve Aaberge
+	email = trygveaa@gmail.com
+[color]
+	ui = auto
+[core]
+	excludesfile = ~/.gitignore_global
+	pager = less -+$LESS -RS
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+[mergetool]
+	prompt = false
+[alias]
+	c = commit
+	co = checkout
+	d = diff
+	dc = diff --cached
+	dw = diff --color-words
+	dcw = diff --cached --color-words
+	dt = difftool
+	l = log
+	st = status -s
+	tree = log --graph --oneline
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+	list-ignored = !git ls-files -v | grep "^[a-z]"
+	stash-p = !git show $(git stash list | cut -d: -f1)

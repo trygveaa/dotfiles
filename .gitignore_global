@@ -1,0 +1,9 @@
+# Global ignores for git
+
+# Editor swap files
+.*.sw[nop]
+.sw[nop]
+
+# RVM files
+.ruby-version
+.ruby-gemset
