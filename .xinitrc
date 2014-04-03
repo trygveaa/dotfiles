@@ -5,10 +5,7 @@
 export HISTSIZE=1000000
 export HISTTIMEFORMAT='%F %T  '
 
-if [ $(cat /sys/class/drm/*/status | grep -c "^connected") -gt 1 ]; then
-    #external_display
-    rmonitor --update
-fi
+rmonitor --update
 
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
