@@ -21,6 +21,12 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# include sbin in PATH if not included
+case $PATH in
+    *sbin*) ;;
+         *) PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin" ;;
+esac
+
 # start X if logging in from tty7 and .xinitrc exists
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 7 ] && [ -e "$HOME/.xinitrc" ]; then
     exec startx
