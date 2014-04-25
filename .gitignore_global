@@ -4,6 +4,9 @@
 .*.sw[nop]
 .sw[nop]
 
+# Ruby bundle
+.bundle/config
+
 # RVM files
 .ruby-version
 .ruby-gemset
