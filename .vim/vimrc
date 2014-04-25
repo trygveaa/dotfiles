@@ -61,6 +61,8 @@ autocmd BufReadPost * call Kees_settabs()
 autocmd BufEnter Makefile* setlocal noet sts=0
 autocmd BufEnter */debian/rules setlocal noet sts=0
 
+autocmd FileType ruby set sts=2 ts=2 sw=2
+
 """ Key bindings
 
 " Copy and paste
