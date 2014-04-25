@@ -103,7 +103,7 @@ vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %T ", 1)
 calendar2.addCalendarToWidget(datewidget)
 
 batterywidget = wibox.widget.textbox()
-vicious.register(batterywidget, vicious.widgets.bat, " $2$1 ", 10, "BAT0")
+vicious.register(batterywidget, vicious.widgets.bat, "$2$1 ", 10, "BAT0")
 batterywidget:buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn("suspend_monitor") end)
 ))
@@ -122,7 +122,7 @@ end)
 batterywidget:connect_signal("mouse::leave", function () naughty.destroy(batterynotification) end)
 
 volumewidget = wibox.widget.textbox()
-vicious.register(volumewidget, vicious.widgets.volume, " $1$2", 60, "Master")
+vicious.register(volumewidget, vicious.widgets.volume, "$1$2 ", 60, "Master")
 vicious.unregister(volumewidget, true)
 volumewidget:buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn("vol mute", false) end),
@@ -145,7 +145,7 @@ mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
                 state = "▶ " .. state
             end
         end
-        return (mpd_reg and mpd_reg.warg.name or "") .. state
+        return (mpd_reg and mpd_reg.warg.name or "") .. state .. " "
     end,
     5,
     { hosts = { "localhost" },
