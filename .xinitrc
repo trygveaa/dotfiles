@@ -15,7 +15,6 @@ numlockx
 
 xset r rate 220 40
 
-pidof update-volume-widget >/dev/null || update-volume-widget
 update-mpd-widget.pl
 
 # Fix a bug with notifications
