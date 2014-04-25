@@ -25,6 +25,9 @@
 	dcw = diff --cached --color-words
 	dt = difftool
 	l = log
+	ld = log --pretty=fuller
+	lo = log --oneline
+	lp = log -p -w -M
 	st = status -s
 	tree = log --graph --oneline
 	ignore = update-index --assume-unchanged
