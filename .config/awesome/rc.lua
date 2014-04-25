@@ -121,6 +121,8 @@ batterywidget:connect_signal("mouse::enter", function ()
 end)
 batterywidget:connect_signal("mouse::leave", function () naughty.destroy(batterynotification) end)
 
+netwidget = wibox.widget.textbox()
+
 volumewidget = wibox.widget.textbox()
 vicious.register(volumewidget, vicious.widgets.volume, "$1$2 ", 60, "Master")
 vicious.unregister(volumewidget, true)
@@ -289,6 +291,7 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mpdwidget)
     right_layout:add(volumewidget)
+    right_layout:add(netwidget)
     right_layout:add(batterywidget)
     right_layout:add(datewidget)
     right_layout:add(mylayoutbox[s])
