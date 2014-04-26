@@ -1,0 +1,27 @@
+ncmpc_like_songs_adding = "yes"
+block_search_constraints_change_if_items_found = "no"
+
+fancy_scrolling = "no"
+cyclic_scrolling = "yes"
+
+playlist_show_remaining_time = "yes"
+playlist_shorten_total_times = "yes"
+
+user_interface = "alternative"
+display_screens_numbers_on_start = "no"
+
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+playlist_editor_display_mode = "columns"
+
+external_editor = "vim"
+use_console_editor = "yes"
+follow_now_playing_lyrics = "yes"
+fetch_lyrics_for_current_song_in_background = "yes"
+
+# Two column mode works poorly with Mopidy
+media_library_disable_two_column_mode = "yes"
+
+# Uncomment to make media library in Mopidy faster
+#media_library_display_date = "no"
