@@ -25,6 +25,7 @@
 local string = { format = string.format }
 local os = { date = os.date, time = os.time }
 local awful = require("awful")
+local widget_tooltip = require("widget_tooltip")
 
 local cal = { }
 
@@ -87,7 +88,7 @@ function cal.register(mywidget, custom_current_day_format)
     if custom_current_day_format then current_day_format = custom_current_day_format end
 
     if not tooltip then
-        tooltip = awful.tooltip({ })
+        tooltip = widget_tooltip.new({ })
         function tooltip:update()
             tooltip:set_markup(string.format('<span font_desc="monospace">%s</span>', displayMonth(state[1], state[2], 2)))
         end
