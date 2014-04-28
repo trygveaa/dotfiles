@@ -8,6 +8,7 @@
 --   + use tooltip instead of naughty.notify
 --   + rename it to cal
 --   + lua52 compliant module
+-- modified by Trygve Aaberge (2014), under GPLv2
 --
 -- 1. require it in your rc.lua
 --  require("cal")
@@ -79,8 +80,7 @@ end
 
 function switchMonth(delta)
     state[1] = state[1] + (delta or 1)
-    local text = string.format('<span font_desc="monospace">%s</span>', displayMonth(state[1], state[2], 2))
-    tooltip:set_markup(text)
+    tooltip:update()
 end
 
 function cal.register(mywidget, custom_current_day_format)
@@ -89,15 +89,18 @@ function cal.register(mywidget, custom_current_day_format)
     if not tooltip then
         tooltip = awful.tooltip({ })
         function tooltip:update()
+            tooltip:set_markup(string.format('<span font_desc="monospace">%s</span>', displayMonth(state[1], state[2], 2)))
+        end
+        function tooltip:set_now()
             local month, year = os.date('%m'), os.date('%Y')
             state = { month, year }
-            tooltip:set_markup(string.format('<span font_desc="monospace">%s</span>', displayMonth(month, year, 2)))
+            tooltip:update()
         end
-        tooltip:update()
+        tooltip:set_now()
     end
     tooltip:add_to_object(mywidget)
 
-    mywidget:connect_signal("mouse::enter", tooltip.update)
+    mywidget:connect_signal("mouse::enter", tooltip.set_now)
 
     mywidget:buttons(awful.util.table.join(
         awful.button({ }, 1, function()
