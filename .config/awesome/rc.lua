@@ -18,7 +18,7 @@ require("completion")
 
 -- Widgets
 vicious = require("vicious")
-require("calendar2")
+local cal = require("cal")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -100,7 +100,7 @@ end
 -- Widgets
 datewidget = wibox.widget.textbox()
 vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %T ", 1)
-calendar2.addCalendarToWidget(datewidget)
+cal.register(datewidget)
 
 batterywidget = wibox.widget.textbox()
 vicious.register(batterywidget, vicious.widgets.bat, "$2$1 ", 10, "BAT0")
