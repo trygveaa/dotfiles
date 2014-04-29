@@ -18,6 +18,7 @@ require("completion")
 
 -- Widgets
 vicious = require("vicious")
+local widget_tooltip = require("widget_tooltip")
 local cal = require("cal")
 
 -- {{{ Error handling
@@ -107,19 +108,16 @@ vicious.register(batterywidget, vicious.widgets.bat, "$2$1 ", 10, "BAT0")
 batterywidget:buttons(awful.util.table.join(
     awful.button({ }, 2, function () awful.util.spawn("suspend_monitor") end)
 ))
-batterywidget:connect_signal("mouse::enter", function ()
-    local f = io.popen("acpi")
-    local acpi = f:read("*all")
-    f:close()
-    acpi = acpi:gsub("[\n\r]+", "")
-    batterynotification = naughty.notify({
-        title = "Battery status",
-        text = acpi,
-        timeout = 0,
-        screen = mouse.screen
-    })
-end)
-batterywidget:connect_signal("mouse::leave", function () naughty.destroy(batterynotification) end)
+batterytooltip = widget_tooltip.new({
+    objects = { batterywidget },
+    timer_function = function ()
+        local f = io.popen("acpi")
+        local acpi = f:read("*all")
+        f:close()
+        acpi = acpi:gsub("[\n\r]+", "")
+        return "<b>Battery status</b>\n" .. acpi
+    end
+})
 
 netwidget = wibox.widget.textbox()
 
