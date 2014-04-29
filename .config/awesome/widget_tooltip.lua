@@ -4,8 +4,11 @@
 
 local timer = timer
 local wibox = require("wibox")
-local a_placement = require("awful.placement")
 local beautiful = require("beautiful")
+local capi = {
+    mouse = mouse,
+    screen = screen
+}
 
 local widget_tooltip = { }
 local data = { }
@@ -13,23 +16,19 @@ local data = { }
 local border_width = 1
 local margin_size = 5
 
--- Place to tooltip on th screen.
--- @param self A tooltip object.
-local function place(self)
-    a_placement.under_mouse(self.wibox)
-    a_placement.no_offscreen(self.wibox)
-end
-
--- Place the tooltip under the mouse.
+-- Place the tooltip in the top right corner of the screen.
 -- @param self A tooltip object.
 local function set_geometry(self)
     local my_geo = self.wibox:geometry()
-    -- calculate width / height
+    local workarea = capi.screen[capi.mouse.screen].workarea
+    -- calculate width / height / x / y
     local n_w, n_h = self.textbox:fit(-1, -1)
     n_w = n_w + self.textmargin.left + self.textmargin.right
     n_h = n_h + self.textmargin.top + self.textmargin.bottom
-    if my_geo.width ~= n_w or my_geo.height ~= n_h then
-        self.wibox:geometry({ width = n_w, height = n_h })
+    local n_x = workarea.x + workarea.width - n_w - 6
+    local n_y = workarea.y + 4
+    if my_geo.width ~= n_w or my_geo.height ~= n_h or my_geo.x ~= n_x or my_geo.y ~= n_y then
+        self.wibox:geometry({ width = n_w, height = n_h, x = n_x, y = n_y })
     end
 end
 
@@ -45,7 +44,6 @@ local function show(self)
         end
     end
     set_geometry(self)
-    place(self)
     self.wibox.visible = true
     self.visible = true
 end
