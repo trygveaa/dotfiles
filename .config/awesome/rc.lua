@@ -11,8 +11,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 naughty.config.defaults.icon_size = 32
 
-local capi = { timer = timer }
-
 -- Custom completion
 require("completion")
 
@@ -174,39 +172,22 @@ mpdwidget:buttons(awful.util.table.join(
     awful.button({ }, 9, function () mpd_change_host(1) end)
 ))
 
-mpd_show_notification = function()
-    local f = io.popen("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " status")
-    local status = f:read("*all")
-    f:close()
-    status = status:gsub("%s*$", "")
+mpdtooltip = widget_tooltip.new({
+    objects = { mpdwidget },
+    timer_function = function ()
+        local f = io.popen("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " status")
+        local status = f:read("*all")
+        f:close()
+        status = status:gsub("%s*$", "")
+        status = status:gsub("[<>&]", { ["<"] = "&lt;", [">"] = "&gt;", ["&"] = "&amp;" })
 
-    f = io.popen("spotify-album-art -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port)
-    local album_art = f:read("*line")
-    f:close()
+        f = io.popen("spotify-album-art -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port)
+        local album_art = f:read("*line")
+        f:close()
 
-    local args = {
-        title = "MPD status",
-        text = status,
-        icon = album_art,
-        icon_size = 64,
-        timeout = 0,
-        screen = mouse.screen
-    }
-    if mpdnotification then
-        args["replaces_id"] = mpdnotification.id
+        return "<b>MPD status</b>\n" .. status, album_art
     end
-    mpdnotification = naughty.notify(args)
-end
-mpd_notification_timer = capi.timer({ timeout = 1 })
-mpd_notification_timer:connect_signal("timeout", mpd_show_notification)
-mpdwidget:connect_signal("mouse::enter", function ()
-    mpd_show_notification()
-    mpd_notification_timer:start()
-end)
-mpdwidget:connect_signal("mouse::leave", function ()
-    mpd_notification_timer:stop()
-    naughty.destroy(mpdnotification)
-end)
+})
 
 -- Create a wibox for each screen and add it
 mywibox = {}
