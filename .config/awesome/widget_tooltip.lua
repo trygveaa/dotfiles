@@ -72,24 +72,24 @@ end
 --- Change displayed text.
 -- @param self The tooltip object.
 -- @param text New tooltip text.
-local function set_text(self, text)
+local function set_text(self, text, no_set_geometry)
     self.textbox:set_text(text)
-    set_geometry(self)
+    if not no_set_geometry then set_geometry(self) end
 end
 
 --- Change displayed text.
 -- @param self The tooltip object.
 -- @param text New tooltip text, including pango markup.
-local function set_markup(self, text)
+local function set_markup(self, text, no_set_geometry)
     self.textbox:set_markup(text)
-    set_geometry(self)
+    if not no_set_geometry then set_geometry(self) end
 end
 
 --- Change displayed icon.
 -- @param self The tooltip object.
 -- @param icon_path Path to new icon.
 -- @param icon_size New icon size.
-local function set_icon(self, icon_path, icon_size)
+local function set_icon(self, icon_path, icon_size, no_set_geometry)
     if icon_path == self.icon_path and icon_size == self.icon_size then
         return
     end
@@ -123,7 +123,7 @@ local function set_icon(self, icon_path, icon_size)
     end
 
     self.icon_size = icon_size
-    set_geometry(self)
+    if not no_set_geometry then set_geometry(self) end
 end
 
 --- Change the tooltip's update interval.
@@ -184,7 +184,10 @@ function widget_tooltip.new(args)
     if args.timer_function then
         data[self].timer = timer { timeout = args.timeout and args.timeout or 1 }
         data[self].timer_function = function()
-                self:set_markup(args.timer_function())
+                local str, icon = args.timer_function()
+                if str then self:set_markup(str, true) end
+                if icon then self:set_icon(icon, nil, true) end
+                set_geometry(self)
             end
         data[self].timer:connect_signal("timeout", data[self].timer_function)
     end
