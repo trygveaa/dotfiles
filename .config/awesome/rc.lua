@@ -143,7 +143,11 @@ mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
                 state = "▶ " .. state
             end
         end
-        return (mpd_reg and mpd_reg.warg.name or "") .. state .. " "
+        local name = (mpd_reg and mpd_reg.warg.name or "")
+        if name ~= "" then
+            name = name .. ": "
+        end
+        return name .. state .. " "
     end,
     5,
     { hosts = { "localhost" },
