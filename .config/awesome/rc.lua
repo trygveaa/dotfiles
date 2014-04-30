@@ -149,11 +149,25 @@ mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
         end
         return name .. state .. " "
     end,
-    5,
-    { hosts = { "localhost" },
-      names = { "" } }
+    5, { }
 )
 vicious.unregister(mpdwidget, true)
+
+local mpd_hosts_file = io.open(os.getenv("HOME") .. "/.config/awesome/mpd_hosts.yml")
+local cur_attr
+for line in mpd_hosts_file:lines() do
+    local tmp = line:match("^(%a+):$")
+    if tmp then
+        cur_attr = tmp
+        mpd_reg.warg[cur_attr] = { }
+    else
+        tmp = line:match("^%s*%- (.*)")
+        if tmp then
+            table.insert(mpd_reg.warg[cur_attr], tmp)
+        end
+    end
+end
+mpd_hosts_file:close()
 
 function mpd_change_host(i)
     mpd_reg.warg.cur_host = ((mpd_reg.warg.cur_host or 1) + i - 1) % #mpd_reg.warg.hosts + 1
