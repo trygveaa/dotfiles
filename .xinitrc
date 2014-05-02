@@ -15,7 +15,4 @@ numlockx
 
 xset r rate 220 40
 
-# Fix a bug with notifications
-sleep 1 && notify -t0.001 -r1 " " && notify -t0.001 -r2 " " &
-
 exec awesome
