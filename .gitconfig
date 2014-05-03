@@ -8,6 +8,8 @@
 	pager = less -+$LESS -RS
 [push]
 	default = simple
+[help]
+	autocorrect = 5
 [diff]
 	tool = vimdiff
 [difftool]
