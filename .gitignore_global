@@ -4,6 +4,9 @@
 .*.sw[nop]
 .sw[nop]
 
+# ctags file
+/tags
+
 # Ruby bundle
 .bundle/config
 
