@@ -13,7 +13,7 @@ alias s='screen -rd all'
 alias k='kinit trygveaa@SAMFUNDET.NO'
 
 # Added options
-alias vi='vim -p'
+alias vi='vim'
 alias vim='vim -p'
 alias feh='feh --scale-down --no-screen-clip'
 
