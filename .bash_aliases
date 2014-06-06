@@ -30,7 +30,7 @@ alias egrep='egrep --color=auto'
 alias vimnorc="vim -u NONE -c 'set nocompatible'"
 alias hideme='history -d $((HISTCMD-1))'
 alias hideprev='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
-alias 8ball="perl -e 'print \$ARGV[rand @ARGV]'"
+alias 8ball="perl -E 'say \$ARGV[rand @ARGV]'"
 
 # Email
 alias mailchecknew='ls ~/Mail/.*/new/* | sed "s|.*/Mail/\([^/]\+\).*|\1|" | uniq -c'
