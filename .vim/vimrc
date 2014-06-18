@@ -33,6 +33,7 @@ set ignorecase
 set smartcase
 set hlsearch
 
+set nostartofline
 set nojoinspaces
 set modeline
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<  " :set list to show whitespace
