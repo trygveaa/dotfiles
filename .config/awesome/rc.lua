@@ -94,21 +94,26 @@ datewidget = wibox.widget.textbox()
 vicious.register(datewidget, vicious.widgets.date, "%a %b %d, %T ", 1)
 cal.register(datewidget)
 
-batterywidget = wibox.widget.textbox()
-vicious.register(batterywidget, vicious.widgets.bat, "$2$1 ", 10, "BAT0")
-batterywidget:buttons(awful.util.table.join(
-    awful.button({ }, 2, function () awful.util.spawn("suspend_monitor") end)
-))
-batterytooltip = widget_tooltip.new({
-    objects = { batterywidget },
-    timer_function = function ()
-        local f = io.popen("acpi")
-        local acpi = f:read("*all")
-        f:close()
-        acpi = acpi:gsub("[\n\r]+", "")
-        return "<b>Battery status</b>\n" .. acpi
-    end
-})
+local battery_name = "BAT0"
+local battery_present = io.open("/sys/class/power_supply/" .. battery_name .. "/present")
+if battery_present ~= nil then
+    battery_present:close()
+    batterywidget = wibox.widget.textbox()
+    vicious.register(batterywidget, vicious.widgets.bat, "$2$1 ", 10, battery_name)
+    batterywidget:buttons(awful.util.table.join(
+        awful.button({ }, 2, function () awful.util.spawn("suspend_monitor") end)
+    ))
+    batterytooltip = widget_tooltip.new({
+        objects = { batterywidget },
+        timer_function = function ()
+            local f = io.popen("acpi")
+            local acpi = f:read("*all")
+            f:close()
+            acpi = acpi:gsub("[\n\r]+", "")
+            return "<b>Battery status</b>\n" .. acpi
+        end
+    })
+end
 
 netwidget = wibox.widget.textbox()
 
@@ -282,7 +287,7 @@ for s = 1, screen.count() do
     right_layout:add(mpdwidget)
     right_layout:add(volumewidget)
     right_layout:add(netwidget)
-    right_layout:add(batterywidget)
+    if batterywidget ~= nil then right_layout:add(batterywidget) end
     right_layout:add(datewidget)
     right_layout:add(mylayoutbox[s])
 
