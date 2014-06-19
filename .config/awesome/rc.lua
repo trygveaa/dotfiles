@@ -489,33 +489,6 @@ awful.rules.rules = {
                      size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    -- Floating windows
-    --{ rule = { class = "MPlayer" },
-      --properties = { floating = true } },
-    --{ rule = { class = "pinentry" },
-      --properties = { floating = true } },
-    --{ rule = { class = "gimp" },
-      --properties = { floating = true } },
-    { rule = { class = "Operapluginwrapper-ia32-linux" }, -- flash in Opera
-      properties = { floating = true } },
-    { rule = { class = "Operapluginwrapper-native" }, -- flash in Opera
-      properties = { floating = true } },
-    { rule = { class = "Exe" }, -- flash in Chrome
-      properties = { floating = true } },
-    { rule = { class = "<unknown>" }, -- flash in Firefox
-      properties = { floating = true } },
-    { rule = { class = "Plugin-container" }, -- flash in Firefox
-      properties = { floating = true } },
-    { rule = { class = "Wine" },
-      properties = { floating = true } },
-    { rule = { class = "Firefox", instance = "Download" },
-      properties = { floating = true } },
-    { rule = { class = "Firefox", instance = "Browser" },
-      properties = { floating = true } },
-
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
