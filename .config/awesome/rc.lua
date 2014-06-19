@@ -363,7 +363,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "r",
         function ()
             awful.prompt.run({ prompt = mypromptbox[mouse.screen].prompt },
@@ -513,7 +512,4 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 end)
-
--- client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
--- client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
