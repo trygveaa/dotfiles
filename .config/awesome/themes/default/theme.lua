@@ -23,8 +23,6 @@ theme.fg_minimize   = "#aaaaaa"
 theme.taglist_squares_sel   = theme_dir .. "squarefw.png"
 theme.taglist_squares_unsel = theme_dir .. "squarew.png"
 
-theme.wallpaper = theme_dir .. "background.jpg"
-
 -- You can use your own layout icons like this:
 theme.layout_tile = "/usr/share/awesome/themes/default/layouts/tilew.png"
 theme.layout_tilebottom = "/usr/share/awesome/themes/default/layouts/tilebottomw.png"
