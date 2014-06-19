@@ -5,7 +5,7 @@
 export HISTSIZE=1000000
 export HISTTIMEFORMAT='%F %T  '
 
-rmonitor --update
+update-monitor &
 
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
