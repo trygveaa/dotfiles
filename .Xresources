@@ -1,13 +1,11 @@
 ! Fonts
 
-URxvt.font: xft:SourceCodePro:size=10,xft:FreeMono:size=10
-URxvt.letterSpace: -1
+URxvt.font: xft:DejaVuSansMono:size=8
+URxvt.lineSpace: 1
 
-Xft.antialias:  true
-Xft.hinting:    true
-
-XTerm*faceName: SourceCodePro
-XTerm*faceSize: 10
+XTerm*faceName: DejaVuSansMono
+XTerm*faceSize: 8
+XTerm*scaleHeight: 1.01
 
 
 ! Misc
