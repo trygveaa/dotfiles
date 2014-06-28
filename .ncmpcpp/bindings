@@ -1,0 +1,4 @@
+# Remove binding for two column mode
+# It works poorly with Mopidy
+def_key "4"
+  show_media_library
