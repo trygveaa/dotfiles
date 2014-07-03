@@ -3,15 +3,13 @@ osc=no
 osd-scale=0.5
 sub-scale=0.8
 
-autosub-match=fuzzy
+sub-auto=fuzzy
 alang=eng,en,nor,no
 
 softvol = yes
 volume = 40
 
 cache=4096
-cache-pause=1
-cache-min=2
 
 vf-add=screenshot
 af-add=scaletempo
