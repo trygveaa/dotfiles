@@ -28,6 +28,7 @@
 	dt = difftool
 	l = log
 	ld = log --pretty=fuller
+	lf = log --stat
 	lg = log --graph --pretty=format:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	lo = log --pretty=format:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	lp = log -p -w -M
@@ -35,4 +36,5 @@
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
 	list-ignored = !git ls-files -v | grep "^[a-z]"
+	list-untracked = ls-files -o -i --exclude-standard
 	stash-p = !git show $(git stash list | cut -d: -f1)
