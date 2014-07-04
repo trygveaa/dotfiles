@@ -400,6 +400,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume",    function () awful.util.spawn("vol -", false) end),
     awful.key({ modkey }, "q", function () awful.util.spawn("browser -c") end),
     awful.key({ modkey, "Control" }, "q", function () awful.util.spawn("browser -cb") end),
+    awful.key({ modkey }, "F8", function () awful.util.spawn("update-monitor") end),
 
     awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/images/ 2>/dev/null'") end),
     awful.key({ modkey }, "Print", nil, function () awful.util.spawn("scrot -s -e 'mv $f ~/images/ 2>/dev/null'") end),
