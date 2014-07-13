@@ -6,6 +6,7 @@ call vundle#rc()
 " Plugins
 Plugin 'gmarik/Vundle.vim'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
