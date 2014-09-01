@@ -1,0 +1,10 @@
+[Unit]
+Description=Update volume widget
+
+[Service]
+User=trygve
+Environment=DISPLAY=:0
+ExecStart=/home/trygve/programming/update-volume-widget/update-volume-widget
+
+[Install]
+WantedBy=multi-user.target

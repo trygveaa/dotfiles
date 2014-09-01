@@ -1,0 +1,12 @@
+[Unit]
+Description=Suspend actions
+Before=sleep.target
+
+[Service]
+Type=forking
+User=trygve
+Environment=DISPLAY=:0
+ExecStart=/home/trygve/bin/lock
+
+[Install]
+WantedBy=sleep.target

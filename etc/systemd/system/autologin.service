@@ -1,0 +1,11 @@
+[Unit]
+Description=Direct login to X
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=/sbin/agetty --autologin trygve --noclear tty7 38400 linux
+Restart=always
+RestartSec=0
+
+[Install]
+WantedBy=graphical.target

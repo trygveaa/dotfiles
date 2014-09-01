@@ -1,0 +1,11 @@
+if [ "$reason" = "NOCARRIER" ]; then
+    ip l set dev $interface down
+    ip l set dev $interface up
+
+elif [ "$reason" = "ROUTERADVERT" ] && [ "$interface" == "eth0" ] && [ "$if_up" = "true" ]; then
+    route=$(ip -6 route)
+
+    if [ $(echo "$route" | grep -v 'expires' | grep -c "default.*$interface") -lt 1 ] && [ $(echo "$route" | grep -c "default.*$interface.*expires") -gt 0 ]; then
+        ip -6 route add $(echo "$route" | grep "default.*$interface.*expires" | sed 's/\(metric\).*/\1 512/')
+    fi
+fi

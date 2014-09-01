@@ -1,0 +1,12 @@
+[Unit]
+Description=Resume actions
+After=sleep.target
+
+[Service]
+Type=oneshot
+User=trygve
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/sleep 4 ; /usr/bin/xmodmap /home/trygve/.Xmodmap
+
+[Install]
+WantedBy=sleep.target

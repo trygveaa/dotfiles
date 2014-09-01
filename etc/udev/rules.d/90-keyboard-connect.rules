@@ -1,0 +1,1 @@
+SUBSYSTEM=="input", ACTION=="add", RUN+="/bin/su trygve -c 'export DISPLAY=:0 && /usr/bin/xmodmap /home/trygve/.Xmodmap'"

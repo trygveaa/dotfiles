@@ -1,0 +1,9 @@
+[Unit]
+Description=Set CPU governor
+
+[Service]
+Type=oneshot
+ExecStart=/home/trygve/bin/coregov auto
+
+[Install]
+WantedBy=multi-user.target
