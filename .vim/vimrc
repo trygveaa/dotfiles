@@ -24,8 +24,8 @@ set autoindent
 set smartindent
 set expandtab
 set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set shiftwidth=0
+set softtabstop=-1
 
 set number
 set mouse=a
@@ -56,16 +56,16 @@ endif
 " Set noexpandtab when file uses tabs for indents
 function Kees_settabs()
     if len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "\\t"')) > len(filter(getbufline(winbufnr(0), 1, 1000), 'v:val =~ "    "'))
-        setlocal noet sts=0
+        setlocal noet
     endif
 endfunction
 autocmd BufReadPost * call Kees_settabs()
 
 " Makefile sanity - always use tabs in makefiles and debian/rules
-autocmd BufEnter Makefile* setlocal noet sts=0
-autocmd BufEnter */debian/rules setlocal noet sts=0
+autocmd BufEnter Makefile* setlocal noet
+autocmd BufEnter */debian/rules setlocal noet
 
-autocmd FileType ruby set sts=2 ts=2 sw=2
+autocmd FileType ruby set ts=2
 
 """ Key bindings
 
