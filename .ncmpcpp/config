@@ -1,6 +1,5 @@
-browser_sort_mode = "unsorted"
+browser_sort_mode = "noop"
 
-ncmpc_like_songs_adding = "yes"
 block_search_constraints_change_if_items_found = "no"
 
 cyclic_scrolling = "yes"
