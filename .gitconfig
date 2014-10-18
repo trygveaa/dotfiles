@@ -28,9 +28,9 @@
 	dt = difftool
 	l = log
 	ld = log --pretty=fuller
-	lf = log --stat
 	lg = log --graph --pretty=format:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	lo = log --pretty=format:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+	lf = log --stat -M
 	lp = log -p -w -M
 	st = status -sb
 	ignore = update-index --assume-unchanged
