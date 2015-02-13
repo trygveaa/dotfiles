@@ -28,6 +28,6 @@ case $PATH in
 esac
 
 # start X if logging in from tty7 and .xinitrc exists
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 7 ] && [ -e "$HOME/.xinitrc" ]; then
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ] && [ -e "$HOME/.xinitrc" ]; then
     exec startx
 fi
