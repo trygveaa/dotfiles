@@ -7,6 +7,10 @@
 # ctags file
 /tags
 
+# Compiled python files
+*.py[co]
+__pycache__
+
 # Ruby bundle
 .bundle/config
 
