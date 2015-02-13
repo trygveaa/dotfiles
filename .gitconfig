@@ -3,7 +3,6 @@
 [color]
 	ui = auto
 [core]
-	excludesfile = ~/.gitignore_global
 	pager = less -+$LESS -RS
 [push]
 	default = simple
