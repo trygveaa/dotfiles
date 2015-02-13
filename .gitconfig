@@ -38,3 +38,4 @@
 	list-ignored = !git ls-files -v | grep "^[a-z]"
 	list-untracked = ls-files -o -i --exclude-standard
 	stash-p = !git show $(git stash list | cut -d: -f1)
+	edit-unmerged = !$EDITOR $(git diff --name-only --diff-filter=U)
