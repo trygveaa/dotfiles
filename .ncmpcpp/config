@@ -1,3 +1,5 @@
+mpd_connection_timeout = 200
+
 browser_sort_mode = "noop"
 
 block_search_constraints_change_if_items_found = "no"
