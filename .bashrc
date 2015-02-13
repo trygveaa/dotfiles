@@ -10,7 +10,7 @@ HISTTIMEFORMAT='%F %T  '
 [[ $- != *i* ]] && return
 
 # Default programs
-export EDITOR='vim'
+export EDITOR='vim -p'
 export BROWSER='browser'
 export PAGER='less -RS'
 export SYSTEMD_LESS=RSMK
