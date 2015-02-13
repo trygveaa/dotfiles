@@ -51,6 +51,12 @@ onelineps1() {
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 }
 
+datediff() {
+    d1=$(date -d "$1" +%s)
+    d2=$(date -d "$2" +%s)
+    echo $(( (d1 - d2) / 86400 )) days
+}
+
 # Preserve HOME and LOGNAME when using sudo (-s)
 sudo() {
     if [ "$1" == "-s" ] || [[ $1 == [^-]* ]]; then
