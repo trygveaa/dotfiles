@@ -16,6 +16,8 @@
 	tool = vimdiff
 [mergetool]
 	prompt = false
+[rerere]
+	enabled = true
 [alias]
 	c = commit
 	co = checkout
