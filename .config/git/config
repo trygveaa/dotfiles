@@ -24,7 +24,11 @@
 	d = diff -w -M
 	dc = diff --cached -w -M
 	dw = diff --color-words -M
+	dwd = diff --color-words=. -M
+	dww = diff --color-words='\\w+' -M
 	dcw = diff --cached --color-words -M
+	dcwd = diff --cached --color-words=. -M
+	dcww = diff --cached --color-words='\\w+' -M
 	dt = difftool
 	l = log
 	ld = log --pretty=fuller
@@ -32,10 +36,16 @@
 	lg = log --graph --pretty=tformat:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	lo = log --pretty=tformat:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	lp = log -p --stat -w -M
+	lpg = log -p --stat -w -M --graph
+	lpw = log -p --stat -w -M --color-words
+	lpwd = log -p --stat -w -M --color-words=.
+	lpww = log -p --stat -w -M --color-words='\\w+'
 	s = status -sb
+	sl = !git status -s | awk '{print $2}'
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
 	list-ignored = !git ls-files -v | grep "^[a-z]"
 	list-untracked = ls-files -o -i --exclude-standard
 	stash-p = !git show $(git stash list | cut -d: -f1)
 	edit-unmerged = !$EDITOR $(git diff --name-only --diff-filter=U)
+	edit-changed = !$EDITOR $(git sl)
