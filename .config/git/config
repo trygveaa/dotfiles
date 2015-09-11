@@ -21,10 +21,10 @@
 [alias]
 	c = commit
 	co = checkout
-	d = diff
-	dc = diff --cached
-	dw = diff --color-words
-	dcw = diff --cached --color-words
+	d = diff -w -M
+	dc = diff --cached -w -M
+	dw = diff --color-words -M
+	dcw = diff --cached --color-words -M
 	dt = difftool
 	l = log
 	ld = log --pretty=fuller
