@@ -31,7 +31,7 @@
 	lf = log --stat -M
 	lg = log --graph --pretty=tformat:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	lo = log --pretty=tformat:'%C(auto)%h -%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-	lp = log -p -w -M
+	lp = log -p --stat -w -M
 	s = status -sb
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
