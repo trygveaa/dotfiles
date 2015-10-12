@@ -22,4 +22,6 @@ numlockx
 
 xset r rate 220 40
 
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+
 exec awesome
