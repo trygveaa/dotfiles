@@ -1,0 +1,8 @@
+[Unit]
+Description=Update net widget
+
+[Service]
+ExecStart=/home/trygve/dev/update-net-widget/update-net-widget
+
+[Install]
+WantedBy=default.target

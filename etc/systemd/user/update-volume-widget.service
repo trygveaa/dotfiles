@@ -1,0 +1,8 @@
+[Unit]
+Description=Update volume widget
+
+[Service]
+ExecStart=/home/trygve/dev/update-volume-widget/update-volume-widget
+
+[Install]
+WantedBy=default.target
