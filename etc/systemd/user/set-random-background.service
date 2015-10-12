@@ -1,0 +1,6 @@
+[Unit]
+Description=Set random background
+
+[Service]
+Type=oneshot
+ExecStart=/home/trygve/bin/set_random_background.pl
