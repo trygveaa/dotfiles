@@ -136,7 +136,7 @@ mpd_reg = vicious.register(mpdwidget, vicious.widgets.mpd,
         elseif args["{state}"] == "N/A" then
             state = "MPD not running"
         else
-            state = args["{Artist}"] .. " - " .. args["{Title}"]
+            state = (args["{Artist}"] ~= "N/A" and args["{Artist}"] or args["{Name}"]) .. " - " .. args["{Title}"]
             if args["{state}"] == "Play" then
                 state = "▶ " .. state
             end
