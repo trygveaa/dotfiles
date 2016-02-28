@@ -51,3 +51,4 @@
 	stash-p = !git show $(git stash list | cut -d: -f1)
 	edit-unmerged = !$EDITOR $(git diff --name-only --diff-filter=U)
 	edit-changed = !$EDITOR $(git sl)
+	vimdiff-forced-update = !"bash -c '{ objects=(${@//.../ }); vimdiff <(git lp master..${objects[0]}) <(git lp master..${objects[1]}); }' arg0"
