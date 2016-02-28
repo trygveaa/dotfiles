@@ -20,6 +20,7 @@
 [rerere]
 	enabled = true
 [alias]
+	b = blame -w -C
 	c = commit
 	co = checkout
 	d = diff -w -M
