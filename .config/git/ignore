@@ -4,6 +4,12 @@
 .*.sw[nop]
 .sw[nop]
 
+# IDE files
+.classpath
+.idea
+.project
+.settings
+
 # ctags file
 /tags
 
