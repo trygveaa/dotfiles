@@ -16,7 +16,9 @@ update-monitor &
 
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
+
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export GTK_IM_MODULE=xim
 
 numlockx
 
