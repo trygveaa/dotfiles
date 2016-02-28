@@ -20,7 +20,7 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 numlockx
 
-xset r rate 220 40
+xset r rate 220 50
 
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 
