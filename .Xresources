@@ -93,7 +93,7 @@ URxvt.color15 : white
 
 ! Xterm emulation
 
-URxvt.termName: xterm
+URxvt.termName: xterm-256color
 
 URxvt.keysym.Home:              \033OH
 URxvt.keysym.End:               \033OF
