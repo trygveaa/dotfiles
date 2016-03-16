@@ -42,7 +42,8 @@ setopt autopushd pushdsilent pushdtohome pushdminus
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
-source /usr/share/git/completion/git-prompt.sh
+[ -r /usr/lib/git-core/git-sh-prompt ] && source /usr/lib/git-core/git-sh-prompt
+[ -r /usr/share/git/git-prompt.sh ] && source /usr/share/git/git-prompt.sh
 
 precmd() {
   # Set terminal title
