@@ -2,7 +2,7 @@
 Description=Set random background timer
 
 [Timer]
-OnBootSec=10m
+OnActiveSec=0
 OnUnitActiveSec=10m
 
 [Install]
