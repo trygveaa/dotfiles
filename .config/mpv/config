@@ -9,8 +9,6 @@ alang=eng,en,nor,no
 softvol = yes
 volume = 40
 
-cache=4096
-
 af-add=scaletempo
 
 use-filedir-conf=yes
