@@ -41,6 +41,11 @@ WORDCHARS=
 DIRSTACKSIZE=20
 setopt autopushd pushdsilent pushdtohome pushdminus
 
+# enable color support of ls
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
 # Prompt line
 
 GIT_PS1_SHOWDIRTYSTATE=1
