@@ -25,6 +25,9 @@ setopt extendedhistory histignoredups histignorespace
 # Use variables in prompt
 setopt prompt_subst
 
+# Use case insensitive globbing
+unsetopt case_glob
+
 # Allow using * and ? when no files match
 unsetopt nomatch
 
