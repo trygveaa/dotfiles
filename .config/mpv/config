@@ -11,7 +11,6 @@ volume = 40
 
 cache=4096
 
-vf-add=screenshot
 af-add=scaletempo
 
 use-filedir-conf=yes
