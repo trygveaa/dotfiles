@@ -1,5 +1,5 @@
 [Unit]
-Description=Set random background
+Description=Set random background timer
 
 [Timer]
 OnBootSec=10m
