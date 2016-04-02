@@ -24,6 +24,7 @@
 	c = commit
 	co = checkout
 	d = diff -w -M
+	ds = diff -p --stat -w -M
 	dc = diff --cached -w -M
 	dw = diff --color-words -M
 	dwd = diff --color-words=. -M
