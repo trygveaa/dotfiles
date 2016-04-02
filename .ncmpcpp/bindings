@@ -2,3 +2,9 @@
 # It works poorly with Mopidy
 def_key "4"
   show_media_library
+
+def_key "j"
+  scroll_down
+
+def_key "k"
+  scroll_up
