@@ -17,6 +17,7 @@ fi
 
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export GTK_IM_MODULE=xim
+export QT_IM_MODULE=xim
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 
 update-monitor &
