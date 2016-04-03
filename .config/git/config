@@ -52,4 +52,4 @@
 	stash-p = !git show $(git stash list | cut -d: -f1)
 	edit-unmerged = !$EDITOR $(git diff --name-only --diff-filter=U)
 	edit-changed = !$EDITOR $(git sl)
-	vimdiff-forced-update = !"bash -c '{ objects=(${@//.../ }); difftool=$(git config diff.tool); gitcmd=${objects[2]:-lp}; base=$(git merge-base ${objects[0]} ${objects[1]}); ${difftool:-diff} <(git $gitcmd $base..${objects[0]}) <(git $gitcmd $base..${objects[1]}); }' arg0"
+	diff-logs = !"bash -c '{ objects=(${@//.../ }); difftool=$(git config diff.tool); gitcmd=${objects[2]:-lp}; base=$(git merge-base ${objects[0]} ${objects[1]}); ${difftool:-diff} <(git $gitcmd $base..${objects[0]}) <(git $gitcmd $base..${objects[1]}); }' arg0"
