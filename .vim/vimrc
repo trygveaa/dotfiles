@@ -111,32 +111,6 @@ nmap <expr> <End>  (match(getline('.'), '^\s*$') != -1 ? '$' : col('.') == strle
 vmap <expr> <End>  (match(getline('.'), '^\s*$') != -1 ? '$' : col('.') == strlen(getline('.'))             ? 'g_' : '$h')
 imap        <End>  <C-o><End>
 
-" Shift+up/down on wrapped lines
-map <S-Up> gk
-imap <S-Up> <C-o><S-Up>
-map <S-Down> gj
-imap <S-Down> <C-o><S-Down>
-
-" Fix S- and C-motion keys in screen
-map  <Esc>[1;2A <S-Up>
-map! <Esc>[1;2A <S-Up>
-map  <Esc>[1;2B <S-Down>
-map! <Esc>[1;2B <S-Down>
-map  <Esc>[1;2C <S-Right>
-map! <Esc>[1;2C <S-Right>
-map  <Esc>[1;2D <S-Left>
-map! <Esc>[1;2D <S-Left>
-map  <Esc>[1;5A <C-Up>
-map! <Esc>[1;5A <C-Up>
-map  <Esc>[1;5B <C-Down>
-map! <Esc>[1;5B <C-Down>
-map  <Esc>[1;5C <C-Right>
-map! <Esc>[1;5C <C-Right>
-map  <Esc>[1;5D <C-Left>
-map! <Esc>[1;5D <C-Left>
-map  <Esc>[Z <S-Tab>
-map! <Esc>[Z <S-Tab>
-
 """ Plugin settings
 
 " NERDCommenter
