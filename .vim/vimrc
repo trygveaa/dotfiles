@@ -19,6 +19,7 @@ filetype plugin indent on
 syntax enable
 
 set updatetime=250
+set ttimeoutlen=0
 
 colorscheme desert
 set t_Co=256
