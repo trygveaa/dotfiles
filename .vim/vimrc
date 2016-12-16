@@ -14,6 +14,27 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'int3/vim-extradite'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'chaoren/vim-wordmotion'
+Plugin 'mbbill/undotree'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'othree/html5.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'gcorne/vim-sass-lint'
+Plugin 'rust-lang/rust.vim'
+
+runtime macros/matchit.vim
 
 """ Settings
 filetype plugin indent on
