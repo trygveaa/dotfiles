@@ -25,7 +25,7 @@ set bg=dark
 set autoindent
 set smartindent
 set expandtab
-set tabstop=4
+set tabstop=2
 set shiftwidth=0
 set softtabstop=-1
 
@@ -66,8 +66,6 @@ autocmd BufReadPost * call Kees_settabs()
 " Makefile sanity - always use tabs in makefiles and debian/rules
 autocmd BufEnter Makefile* setlocal noet
 autocmd BufEnter */debian/rules setlocal noet
-
-autocmd FileType ruby set ts=2
 
 """ Key bindings
 
