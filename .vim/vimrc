@@ -86,9 +86,6 @@ map <expr> <C-v> (match(@+, "\n") != -1 ? '"+p' : '"+P')
 imap <expr> <C-v> (col('.')-1 == strlen(getline('.')) ? '<C-o>"+p' : '<C-o><C-v>')
 
 " Quit and write
-nmap <C-d> :q<CR>
-vmap <C-d> <Esc><C-d>
-imap <C-d> <C-o><C-d>
 nmap <C-s> :w<CR>
 vmap <C-s> <Esc><C-s>
 imap <C-s> <C-o><C-s>
