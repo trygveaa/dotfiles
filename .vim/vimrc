@@ -10,9 +10,10 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 """ Settings
 filetype plugin indent on
@@ -119,6 +120,14 @@ imap        <End>  <C-o><End>
 
 """ Plugin settings
 
+" fzf
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+nmap <C-p> :Files<CR>
+nmap <Esc><C-p> :Ag<CR>
+nmap <Esc>p :Buffers<CR>
+nmap <Esc>P :History<CR>
+nmap ,a :Ag 
+
 " NERDCommenter
 map <Esc>c <Leader>c<Space>
 " Let NERDCommenter see the commentstring
@@ -126,13 +135,3 @@ filetype plugin on
 " Use // for comments in C and C++
 " Should work but doesn't, issue 33: let NERD_c_alt_style=1
 let g:NERDCustomDelimiters = { 'c': { 'left': '//', 'right': '', 'leftAlt': '/*', 'rightAlt': '*/' } }
-
-" Ctrl-P
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = ''
-" Ctrl-P, open tab as default.
-let g:ctrlp_prompt_mappings = {
-  \ 'AcceptSelection("e")': ['<c-t>'],
-  \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-\ }
