@@ -133,9 +133,6 @@ map <Esc>c <Leader>c<Space>
 " Let NERDCommenter see the commentstring
 filetype plugin on
 " Use // for comments in C and C++
-" Should work but doesn't, issue 33: let NERD_c_alt_style=1
-let g:NERDCustomDelimiters = {
-    \ 'c': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
-    \ 'python': { 'left': '#' },
-    \ }
+let g:NERDAltDelims_c = 1
+let g:NERDAltDelims_python = 1
 let NERDSpaceDelims=1
