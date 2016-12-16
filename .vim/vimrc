@@ -114,8 +114,7 @@ imap        <End>  <C-o><End>
 """ Plugin settings
 
 " NERDCommenter
-let mapleader=","
-map <Esc>c ,c<Space>
+map <Esc>c <Leader>c<Space>
 " Let NERDCommenter see the commentstring
 filetype plugin on
 " Use // for comments in C and C++
