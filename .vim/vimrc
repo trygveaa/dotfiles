@@ -146,6 +146,12 @@ imap        <End>  <C-o><End>
 
 """ Plugin settings
 
+let g:table_mode_corner="|"
+let g:wordmotion_prefix = "<Leader>"
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsListSnippets = "<c-k>"
+let g:UseNumberToggleTrigger=0
+
 " fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 nmap <C-p> :Files<CR>
@@ -162,3 +168,42 @@ filetype plugin on
 let g:NERDAltDelims_c = 1
 let g:NERDAltDelims_python = 1
 let NERDSpaceDelims=1
+
+" YouCompleteMe
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+
+" Syntastic
+let g:syntastic_java_javac_delete_output = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_sass_checkers = ['sass_lint']
+let g:syntastic_scss_checkers = ['sass_lint']
+let g:syntastic_java_checkers = ['checkstyle']
+let g:syntastic_java_checkstyle_classpath = '/opt/checkstyle/checkstyle-6.18-all.jar'
+let g:syntastic_java_checkstyle_conf_file = '/home/trygve/dev/hb/cap/config/sun_checks.xml'
+
+" Eclim
+let g:EclimCompletionMethod = 'omnifunc'
+let g:EclimDefaultFileOpenAction = 'edit'
+let g:EclimMavenPomClasspathUpdate = 0
+
+" Multiple cursors
+let g:multi_cursor_exit_from_insert_mode=0
+let g:multi_cursor_exit_from_visual_mode=0
+
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+    if exists("youcompleteme#DisableCursorMovedAutocommands")
+        :call youcompleteme#DisableCursorMovedAutocommands()
+        " :call asd
+    endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+    if exists("youcompleteme#DisableCursorMovedAutocommands")
+        :call youcompleteme#DisableCursorMovedAutocommands()
+    endif
+endfunction
