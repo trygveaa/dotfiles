@@ -103,6 +103,9 @@ autocmd BufEnter */debian/rules setlocal noet
 
 """ Key bindings
 
+imap jk <Esc>
+imap jj <Esc>
+
 " Copy and paste
 set pastetoggle=<F10>
 vmap <C-c> "+y
