@@ -95,6 +95,8 @@ cnoreabbrev W w
 " Remove search highlights and numbers
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
 inoremap <silent> <C-l> <C-o>:nohlsearch<CR><C-o><C-l>
+map  <silent> <F11> :set relativenumber!<CR>
+map! <silent> <F11> <C-o>:set relativenumber!<CR>
 map  <silent> <F12> :set number!<CR>
 map! <silent> <F12> <C-o>:set number!<CR>
 
