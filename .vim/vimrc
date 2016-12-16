@@ -18,6 +18,8 @@ Plugin 'mxw/vim-jsx'
 filetype plugin indent on
 syntax enable
 
+set updatetime=250
+
 colorscheme desert
 set t_Co=256
 set bg=dark
