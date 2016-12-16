@@ -46,6 +46,7 @@ set wrap
 set linebreak
 set nrformats=octal,hex,alpha
 
+set hidden
 set tabpagemax=100
 set scrolloff=3
 set statusline=%<%F%(\ %h%m%r%w%)\ [%Y\ %{&ff}]%=%b\ 0x%B\ \ %-17.(%l/%L,%c%V%)%P\ %<
@@ -99,11 +100,10 @@ imap <silent> <C-l> <C-o><C-l>
 map  <silent> <F12> :set number!<CR>
 map! <silent> <F12> <C-o>:set number!<CR>
 
-" Change tab with tab and shift+tab. New tab with alt+t
-map  <Esc>t :tabnew<CR>
-imap <Esc>t <C-o><Esc>t
-map  <Tab> :tabnext<CR>
-map  <S-Tab> :tabprevious<CR>
+" Change files with tab and shift+tab. New tab with alt+t
+nmap  <Esc>t :tabnew<CR>
+map  <Tab> :next<CR>
+map  <S-Tab> :previous<CR>
 
 " Indent and unindent lines with tab and shift+tab
 vmap <silent> <Tab> >gvllllollllo
