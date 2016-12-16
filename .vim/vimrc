@@ -52,6 +52,7 @@ set scrolloff=3
 set statusline=%<%F%(\ %h%m%r%w%)\ [%Y\ %{&ff}]%=%b\ 0x%B\ \ %-17.(%l/%L,%c%V%)%P\ %<
 set rulerformat=%20(%-17.(%M%l/%L,%c%V%)%P%)%<
 set showcmd
+set wildmenu
 
 set list
 set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:+
