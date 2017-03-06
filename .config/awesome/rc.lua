@@ -392,6 +392,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "a", function() awful.util.spawn(terminal .. " -e mosh trygve@kramer.samfundet.no") end),
     awful.key({ modkey }, "s", function() awful.util.spawn(terminal .. " -e ssh -X trygve@kramer.samfundet.no") end),
     awful.key({ modkey }, "<", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey }, "v", function () cal.toggle() end),
     awful.key({ modkey }, "-", function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " toggle", false) end),
     awful.key({ modkey, "Shift" }, "-", function () awful.util.spawn("mpdfade", false) end),
     awful.key({ }, "XF86AudioPlay",    function () awful.util.spawn("music -h " .. mpd_reg.warg.host .. " -p " .. mpd_reg.warg.port .. " toggle", false) end),

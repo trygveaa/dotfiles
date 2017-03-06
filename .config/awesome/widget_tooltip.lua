@@ -174,6 +174,10 @@ function widget_tooltip.new(args)
         remove_from_object = remove_from_object
     }
 
+    self.show = function() show(self) end
+    self.hide = function() hide(self) end
+    self.toggle = function() if self.visible then hide(self) else show(self) end end
+
     -- private data
     data[self] = {
         show = function() show(self) end,

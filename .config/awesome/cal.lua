@@ -131,4 +131,16 @@ function cal.register(mywidget, custom_current_day_format)
     ))
 end
 
+function cal.show()
+    tooltip.show()
+end
+
+function cal.hide()
+    tooltip.hide()
+end
+
+function cal.toggle()
+    tooltip.toggle()
+end
+
 return cal
