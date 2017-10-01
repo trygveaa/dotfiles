@@ -132,6 +132,7 @@ function cal.register(mywidget, custom_current_day_format)
 end
 
 function cal.show()
+    tooltip.set_now()
     tooltip.show()
 end
 
@@ -140,6 +141,7 @@ function cal.hide()
 end
 
 function cal.toggle()
+    tooltip.set_now()
     tooltip.toggle()
 end
 
