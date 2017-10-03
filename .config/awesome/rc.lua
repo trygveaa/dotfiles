@@ -407,8 +407,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "q", function () awful.util.spawn("browser -cb") end),
     awful.key({ modkey }, "F8", function () awful.util.spawn("update-monitor") end),
 
-    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/images/ 2>/dev/null'") end),
-    awful.key({ modkey }, "Print", nil, function () awful.util.spawn("scrot -s -e 'mv $f ~/images/ 2>/dev/null'") end),
+    awful.key({ }, "Print", function () awful.util.spawn("screenshot") end),
+    awful.key({ modkey }, "Print", nil, function () awful.util.spawn("screenshot -s") end),
 
     awful.key({ modkey }, "c", function ()
         awful.prompt.run({ prompt = "Calculate: " }, mypromptbox[mouse.screen].widget,
