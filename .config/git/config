@@ -17,6 +17,8 @@
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+[rebase]
+	autoSquash = true
 [rerere]
 	enabled = true
 [pretty]
