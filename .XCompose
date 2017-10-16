@@ -8,4 +8,4 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <Left>  : "←"
 <Multi_key> <Up>  : "↑"
 <Multi_key> <Right>  : "→"
-<Multi_key> <Down>  : "↓
+<Multi_key> <Down>  : "↓"
