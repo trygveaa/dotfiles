@@ -27,6 +27,9 @@ case $PATH in
          *) PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin" ;;
 esac
 
+# include bin from node_modules and yarn at the end of PATH
+PATH="$PATH:./node_modules/.bin:$HOME/.yarn/bin"
+
 # start X if logging in from tty7 and .xinitrc exists
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ] && [ -e "$HOME/.xinitrc" ]; then
     exec startx
