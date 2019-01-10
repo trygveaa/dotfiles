@@ -24,4 +24,6 @@ numlockx
 
 xset r rate 220 50
 
+xcape -e 'Caps_Lock=Escape;Shift_L=Return;Control_L=BackSpace'
+
 exec awesome
