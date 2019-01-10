@@ -8,6 +8,8 @@
 	default = simple
 [help]
 	autocorrect = 5
+[interactive]
+	singleKey = true
 [diff]
 	tool = vimdiff
 [difftool]
