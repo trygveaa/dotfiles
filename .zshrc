@@ -88,6 +88,8 @@ zle -N backward-kill-word-space backward-kill-word-match
 zstyle ':zle:backward-kill-word-space' word-style space
 bindkey '^W' backward-kill-word-space
 
+bindkey -s '^Z' ' fg\n'
+
 # Aliases
 
 alias ls='ls --color=auto'
