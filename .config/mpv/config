@@ -7,7 +7,7 @@ sub-auto=fuzzy
 alang=eng,en,nor,no
 
 softvol = yes
-volume = 40
+audio-channels=auto
 
 af-add=scaletempo
 
