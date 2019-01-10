@@ -20,8 +20,6 @@ export GTK_IM_MODULE=xim
 export QT_IM_MODULE=xim
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 
-update-monitor &
-
 numlockx
 
 xset r rate 220 50
