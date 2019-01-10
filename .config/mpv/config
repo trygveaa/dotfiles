@@ -6,11 +6,10 @@ sub-scale=0.8
 sub-auto=fuzzy
 alang=eng,en,nor,no
 
-softvol = yes
 audio-channels=auto
 
 af-add=scaletempo
 
 use-filedir-conf=yes
 
-input=file=/home/trygve/mplayer
+input-file=/home/trygve/mplayer
