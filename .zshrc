@@ -94,3 +94,4 @@ bindkey -s '^Z' ' fg\n'
 
 alias ls='ls --color=auto'
 alias -g statopen='--stat=1000 | grep "|" | awk "{print \$1}" | parallel --will-cite -j1 -n1000 --tty $EDITOR'
+alias editall='parallel --will-cite -j1 -n1000 --tty $EDITOR'
